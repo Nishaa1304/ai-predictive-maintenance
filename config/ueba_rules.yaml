@@ -1,0 +1,125 @@
+# UEBA Security Rules
+
+# Agent Behavior Monitoring
+behavior_monitoring:
+  enabled: true
+  sampling_interval_seconds: 30
+  baseline_learning_period_days: 7
+  
+# Anomaly Detection Rules
+anomaly_rules:
+  # Data Access Patterns
+  - name: "excessive_data_access"
+    description: "Agent accessing more data than usual"
+    threshold: 3.0  # Standard deviations from baseline
+    severity: "high"
+    action: "alert"
+    
+  - name: "unauthorized_data_access"
+    description: "Agent accessing data outside its scope"
+    threshold: 0
+    severity: "critical"
+    action: "block"
+    
+  # API Call Patterns
+  - name: "api_call_spike"
+    description: "Sudden increase in API calls"
+    threshold: 5.0
+    severity: "medium"
+    action: "alert"
+    
+  - name: "failed_authentication"
+    description: "Multiple failed authentication attempts"
+    threshold: 3
+    severity: "high"
+    action: "block"
+    
+  # Agent Communication Patterns
+  - name: "unusual_message_routing"
+    description: "Agent sending messages to unexpected destinations"
+    threshold: 0
+    severity: "critical"
+    action: "block"
+    
+  - name: "message_volume_anomaly"
+    description: "Abnormal message queue activity"
+    threshold: 4.0
+    severity: "medium"
+    action: "alert"
+    
+  # Model Inference Patterns
+  - name: "prediction_drift"
+    description: "ML model predictions deviating from normal"
+    threshold: 2.5
+    severity: "medium"
+    action: "alert"
+    
+  - name: "model_tampering"
+    description: "Unauthorized model file access or modification"
+    threshold: 0
+    severity: "critical"
+    action: "block"
+    
+  # Time-based Anomalies
+  - name: "off_hours_activity"
+    description: "Agent activity during unusual hours"
+    threshold: 2.0
+    severity: "low"
+    action: "log"
+    
+  - name: "rapid_sequential_actions"
+    description: "Actions performed too quickly (possible automation attack)"
+    threshold: 10  # Actions per second
+    severity: "high"
+    action: "throttle"
+
+# Threat Scoring
+threat_scoring:
+  low: [0, 30]
+  medium: [31, 60]
+  high: [61, 85]
+  critical: [86, 100]
+  
+  score_decay_hours: 24  # Reduce score over time if no new anomalies
+  
+# Actions
+actions:
+  log:
+    enabled: true
+    destination: "logs/ueba.log"
+    
+  alert:
+    enabled: true
+    channels:
+      - email: "security@company.com"
+      - slack: "#security-alerts"
+      - dashboard: true
+    
+  throttle:
+    enabled: true
+    rate_limit: "10/minute"
+    
+  block:
+    enabled: true
+    duration_minutes: 60
+    auto_unblock: false
+    require_admin_review: true
+    
+  quarantine:
+    enabled: true
+    isolate_agent: true
+    preserve_logs: true
+
+# Whitelisting
+whitelisting:
+  enabled: true
+  trusted_agents: []
+  trusted_ips: ["127.0.0.1"]
+  trusted_api_keys: []
+  
+# Audit Logging
+audit:
+  enabled: true
+  log_all_actions: true
+  retention_days: 90
+  compliance_mode: true  # For regulatory requirements

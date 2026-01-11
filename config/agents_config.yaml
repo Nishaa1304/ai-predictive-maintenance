@@ -1,0 +1,68 @@
+# Agent Configuration
+agents:
+  orchestrator:
+    enabled: true
+    max_concurrent_tasks: 10
+    retry_attempts: 3
+    timeout_seconds: 300
+
+  data_analysis_agent:
+    enabled: true
+    telemetry_batch_size: 100
+    analysis_interval_seconds: 60
+    anomaly_threshold: 0.85
+    
+  diagnosis_agent:
+    enabled: true
+    prediction_confidence_threshold: 0.75
+    severity_levels: ["critical", "high", "medium", "low"]
+    dtc_database_path: "data/dtc_codes/dtc_definitions.json"
+    
+  scheduling_agent:
+    enabled: true
+    max_booking_attempts: 3
+    service_center_radius_km: 50
+    preferred_booking_window_days: 7
+    
+  customer_engagement_agent:
+    enabled: true
+    voice_enabled: true
+    sms_enabled: true
+    email_enabled: true
+    max_call_attempts: 2
+    voice_provider: "openai"  # or "elevenlabs", "google"
+    
+  feedback_agent:
+    enabled: true
+    survey_trigger_delay_hours: 24
+    nps_enabled: true
+    sentiment_analysis_enabled: true
+    
+  manufacturing_insights_agent:
+    enabled: true
+    batch_analysis_threshold: 10
+    rca_confidence_threshold: 0.80
+    capa_auto_generation: true
+    
+  ueba_agent:
+    enabled: true
+    monitoring_interval_seconds: 30
+    anomaly_score_threshold: 0.75
+    auto_block_enabled: true
+    alert_channels: ["email", "slack"]
+
+# Message Queue
+messaging:
+  broker: "rabbitmq"  # or "kafka"
+  host: "localhost"
+  port: 5672
+  username: "guest"
+  password: "guest"
+  exchange: "vehicle_telemetry"
+  
+# Logging
+logging:
+  level: "INFO"
+  format: "json"
+  file_path: "logs/agents.log"
+  rotation: "100 MB"

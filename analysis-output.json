@@ -1,0 +1,12 @@
+{
+  "project_root": "/d/Final_codeslayers_project/AI-Powered-Predictive-Maintenance-and-Fault-Diagnosis-System",
+  "frontend": {
+    "framework": "nextjs",
+    "details": "package.json found; build="next build"; test="""
+  },
+  "backend": {
+    "framework": "python_fastapi",
+    "details": "requirements.txt contains fastapi"
+  },
+  "timestamp": "2025-11-30T08:45:36+05:30"
+}

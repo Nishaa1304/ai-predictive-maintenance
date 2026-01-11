@@ -1,0 +1,73 @@
+# ML Model Configuration
+
+# Failure Prediction Model
+failure_prediction:
+  model_type: "lstm"
+  input_features:
+    - engine_temperature
+    - battery_voltage
+    - oil_pressure
+    - coolant_temperature
+    - rpm
+    - speed
+    - vibration_level
+    - fuel_pressure
+  sequence_length: 50
+  prediction_horizon_days: 7
+  model_path: "ml-models/trained/failure_predictor.h5"
+  confidence_threshold: 0.75
+
+# Anomaly Detection Model
+anomaly_detection:
+  model_type: "autoencoder"
+  contamination: 0.05
+  threshold: 0.85
+  window_size: 100
+  model_path: "ml-models/trained/anomaly_detector.pkl"
+
+# DTC Classifier
+dtc_classifier:
+  model_type: "xgboost"
+  classes:
+    - "engine"
+    - "transmission"
+    - "brakes"
+    - "electrical"
+    - "emissions"
+  model_path: "ml-models/trained/dtc_classifier.joblib"
+
+# Feature Engineering
+feature_engineering:
+  scaling_method: "standard"  # or "minmax", "robust"
+  handle_missing: "interpolate"
+  rolling_window_features:
+    - mean
+    - std
+    - min
+    - max
+  time_based_features: true
+
+# Training Configuration
+training:
+  batch_size: 32
+  epochs: 100
+  validation_split: 0.2
+  early_stopping_patience: 10
+  learning_rate: 0.001
+  optimizer: "adam"
+  
+# Model Evaluation
+evaluation:
+  metrics:
+    - accuracy
+    - precision
+    - recall
+    - f1_score
+    - roc_auc
+  cross_validation_folds: 5
+
+# Model Serving
+serving:
+  batch_inference_size: 1000
+  real_time_inference_timeout_ms: 100
+  model_cache_enabled: true

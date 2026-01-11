@@ -1,0 +1,54 @@
+# Database Configuration
+
+# PostgreSQL (Main relational database)
+postgresql:
+  host: "localhost"
+  port: 5432
+  database: "vehicle_maintenance"
+  username: "postgres"
+  password: "${POSTGRES_PASSWORD}"
+  pool_size: 20
+  max_overflow: 10
+  echo: false
+  
+# MongoDB (Document store for telemetry & logs)
+mongodb:
+  host: "localhost"
+  port: 27017
+  database: "vehicle_telemetry"
+  username: "mongo_user"
+  password: "${MONGO_PASSWORD}"
+  auth_source: "admin"
+  collections:
+    telemetry: "vehicle_telemetry"
+    predictions: "failure_predictions"
+    logs: "agent_logs"
+
+# Redis (Caching & real-time data)
+redis:
+  host: "localhost"
+  port: 6379
+  password: "${REDIS_PASSWORD}"
+  db: 0
+  max_connections: 50
+  cache_ttl_seconds: 3600
+  
+# Time-series Database (Optional - for metrics)
+timescaledb:
+  enabled: false
+  host: "localhost"
+  port: 5432
+  database: "timeseries"
+  
+# Connection Pooling
+connection_pooling:
+  min_size: 5
+  max_size: 20
+  timeout: 30
+  
+# Backup Configuration
+backup:
+  enabled: true
+  schedule: "0 2 * * *"  # Daily at 2 AM
+  retention_days: 30
+  storage_path: "backups/"

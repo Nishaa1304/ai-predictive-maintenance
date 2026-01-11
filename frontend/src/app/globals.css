@@ -1,0 +1,160 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 249, 250, 251;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@layer base {
+  body {
+    color: rgb(var(--foreground-rgb));
+    background: linear-gradient(
+      to bottom,
+      rgb(var(--background-start-rgb)),
+      rgb(var(--background-end-rgb))
+    );
+  }
+}
+
+@layer components {
+  .card {
+    @apply bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition-shadow;
+  }
+  
+  .btn-primary {
+    @apply bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+  
+  .btn-secondary {
+    @apply bg-gray-200 hover:bg-gray-300 text-gray-800 font-medium py-2 px-4 rounded-lg transition-colors;
+  }
+  
+  .badge-success {
+    @apply bg-green-100 text-green-700 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-warning {
+    @apply bg-yellow-100 text-yellow-700 px-3 py-1 rounded-full text-sm font-medium;
+  }
+  
+  .badge-danger {
+    @apply bg-red-100 text-red-700 px-3 py-1 rounded-full text-sm font-medium;
+  }
+}
+
+/* Alert System Animations */
+@keyframes slideInFromTop {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes pulseSlow {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.7;
+  }
+}
+
+@keyframes counterIncrement {
+  from {
+    transform: scale(1);
+  }
+  to {
+    transform: scale(1.05);
+  }
+}
+
+@keyframes toastSlideIn {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.alert-slide-in {
+  animation: slideInFromTop 0.5s ease-out;
+}
+
+.status-fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+.log-fade-in {
+  animation: fadeIn 0.4s ease-in;
+}
+
+.animate-pulse-slow {
+  animation: pulseSlow 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+.counter-animate {
+  transition: all 0.3s ease-in-out;
+}
+
+.toast-slide-in {
+  animation: toastSlideIn 0.4s ease-out;
+}
+
+/* Custom Scrollbar */
+.custom-scrollbar::-webkit-scrollbar {
+  width: 6px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: rgba(31, 41, 55, 0.5);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(59, 130, 246, 0.5);
+  border-radius: 10px;
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(59, 130, 246, 0.7);
+}
+
+/* Sidebar Animations */
+@keyframes slideInFromLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.sidebar-item {
+  animation: slideInFromLeft 0.3s ease-out;
+}
+
+/* Smooth transitions for view changes */
+.view-transition {
+  animation: fadeIn 0.4s ease-in;
+}
